@@ -16,9 +16,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class IssueController extends AbstractController
 {
     /**
-     * @Route("/api/Issues", name="api_GetAll_Issues", methods={"GET"})
+     * @Route("/api/Issues", name="GET_All_ISSUES", methods={"GET"})
      */
-    public function getAllIssues(IssueRepository $issueRepository)
+    public function GetAllIssues(IssueRepository $issueRepository)
     {
 
         return $this->json($issueRepository->findAll(), 200, [], ['groups' => 'issue']);
@@ -27,7 +27,7 @@ class IssueController extends AbstractController
      * @Route("/api/Issue/{id}", name="GET_ALL_BY_ID", methods={"GET"})
      */
 
-    public function GetOwnerbyId($id, IssueRepository $issueRepository)
+    public function GetIssueById($id, IssueRepository $issueRepository)
     {
         if ($issueRepository->find($id) == null) {
             $json = ['message' => 'id not found'];
@@ -56,7 +56,7 @@ class IssueController extends AbstractController
     /**
      * @Route("/api/Issue/{id}", name="UPDATE_ISSUE", methods={"PUT"})
      */
-    public function Update($id, IssueRepository $issueRepository, Request $request, EntityManagerInterface $entityManagerInterface, SerializerInterface $serializer)
+    public function UpdateIssue($id, IssueRepository $issueRepository, Request $request, EntityManagerInterface $entityManagerInterface, SerializerInterface $serializer)
     {
 
         $jsonResponse = $request->getContent();
@@ -79,7 +79,7 @@ class IssueController extends AbstractController
       /**
      * @Route("/api/Issue/{id}", name="DELETE_ISSUE", methods={"DELETE"})
      */
-    public function DELETE($id, IssueRepository $issueRepository, EntityManagerInterface $entityManagerInterface)
+    public function DeleteIssue($id, IssueRepository $issueRepository, EntityManagerInterface $entityManagerInterface)
     {
         if ($issueRepository->find($id) == null) {
             $json = ['message' => 'id not found'];
@@ -99,8 +99,5 @@ class IssueController extends AbstractController
 
         return $this->json($json, 202, [], ['groups' => 'issue']);
     }
-    // GET /api/issue/{id}
-    // POST /api/issue
-    // PUT(UPDATE) /api/issue/{id}
-    // DELETE /api/issue/{id}
+   
 }

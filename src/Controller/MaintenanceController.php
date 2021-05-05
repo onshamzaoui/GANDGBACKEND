@@ -18,9 +18,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class MaintenanceController extends AbstractController
 {
     /**
-     * @Route("/api/maintenance", name="maintenanceGETALL" , methods={"GET"})
+     * @Route("/api/maintenance", name="MAINTENANCE_GET_ALL" , methods={"GET"})
      */
-    public function GetAll(MaintenanceRepository $maintenanceRepository)
+    public function GetAllMaitenance(MaintenanceRepository $maintenanceRepository)
     {
 
 
@@ -28,7 +28,7 @@ class MaintenanceController extends AbstractController
         $maintenance = $maintenanceRepository->findAll();
         
         //send all the data in json format
-        return $this->json($maintenanceRepository->findAll() , 200 , [] , ['groups'=>'maintenance']);
+        return $this->json($maintenance, 200 , [] , ['groups'=>'maintenance']);
     }
 
     /**
@@ -52,7 +52,7 @@ class MaintenanceController extends AbstractController
     }
 
     /**
-     * @Route("/api/maintenance/product/{id}", name="GET_ALL_BY_Product_ID" , methods={"GET"})
+     * @Route("/api/maintenance/product/{id}", name="GET_ALL_BY_PRODUCT_ID" , methods={"GET"})
      */
     public function GetAllByProductID($id , MaintenanceRepository $maintenanceRepository)
     {

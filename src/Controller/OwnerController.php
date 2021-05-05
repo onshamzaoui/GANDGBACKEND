@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class OwnerController extends AbstractController
 {
     /**
-     * @Route("/auth/Register", name="auth_Register" , methods={"POST"})
+     * @Route("/auth/Register", name="AUTH_REGISTER" , methods={"POST"})
      */
     public function Register(Request $request, SerializerInterface $serializer, EntityManagerInterface $entityManagerInterface, UserPasswordEncoderInterface $encoder, ValidatorInterface $validator)
     {
@@ -42,7 +42,7 @@ class OwnerController extends AbstractController
 
             $entityManagerInterface->flush();
 
-            return $this->json($owner, 201, [], ['groups' => 'seller']);
+            return $this->json($owner, 201, [], ['groups' => 'owner']);
         } catch (NotEncodableValueException $e) {
             return $this->json([
                 'status' => 400,

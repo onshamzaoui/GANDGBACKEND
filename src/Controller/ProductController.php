@@ -23,18 +23,18 @@ use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/api/products", name="api_GetAll_Products", methods={"GET"})
+     * @Route("/api/products", name="GET_ALL_PRODUCTS", methods={"GET"})
      */
-    public function getAll(ProductRepository $productRepository)
+    public function GetAllProducts(ProductRepository $productRepository)
     {
 
         return $this->json($productRepository->findAll(), 200, [], ['groups' => 'product']);
     }
 
     /**
-     * @Route("/api/product/{id}", name="api_product_getOne", methods={"GET"})
+     * @Route("/api/product/{id}", name="GET_ONE_PRODUCT_BY_ID", methods={"GET"})
      */
-    public function getOne($id, ProductRepository $productRepository)
+    public function GetOneProductById($id, ProductRepository $productRepository)
     {
 
         if ($productRepository->find($id) == null) {
@@ -48,9 +48,9 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/api/products/owner/{id}", name="api_product_owner_getAll", methods={"GET"})
+     * @Route("/api/products/owner/{id}", name="GET_ALL_OWNER_PRODUCT_BY_ID", methods={"GET"})
      */
-    public function getbyownerid($id, ProductRepository $productRepository)
+    public function GetByOwnerId($id, ProductRepository $productRepository)
     {
 
         if ($productRepository->findBy(['Owner' => $id]) == null) {
@@ -62,7 +62,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/api/product/{id}", name="Delete_product_by_id", methods={"DELETE"})
+     * @Route("/api/product/{id}", name="DELETE_PRODUCT", methods={"DELETE"})
      */
     public function DeleteProduct($id, ProductRepository $productRepository, EntityManagerInterface $entityManagerInterface)
     {
@@ -87,9 +87,9 @@ class ProductController extends AbstractController
 
 
     /**
-     * @Route("/api/product", name="add_new_product", methods={"POST"})
+     * @Route("/api/product", name="ADD_NEW_PRODUCT", methods={"POST"})
      */
-    public function add(Request $request, OwnerRepository $ownerRepository , CategoryRepository $categoryRepository , SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $entityManagerInterface)
+    public function AddNewProduct(Request $request, OwnerRepository $ownerRepository , CategoryRepository $categoryRepository , SerializerInterface $serializer, ValidatorInterface $validator, EntityManagerInterface $entityManagerInterface)
     {
         $jsonResponse = $request->getContent();
 
@@ -144,9 +144,9 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/api/product/{id}", name="api_product_update", methods={"PUT"})
+     * @Route("/api/product/{id}", name="UPDATE_PRODUCT", methods={"PUT"})
      */
-    public function update($id , ProductRepository $productRepository , Request $request , EntityManagerInterface $entityManagerInterface , SerializerInterface $serializer ){
+    public function UpdateProduct($id , ProductRepository $productRepository , Request $request , EntityManagerInterface $entityManagerInterface , SerializerInterface $serializer ){
         
         $jsonResponse = $request->getContent();
 
