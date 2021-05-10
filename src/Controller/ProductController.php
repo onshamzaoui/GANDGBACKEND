@@ -60,6 +60,19 @@ class ProductController extends AbstractController
         }
         return $this->json($productRepository->findBy(['Owner' => $id]), 200, [], ['groups' => 'product']);
     }
+        /**
+     * @Route("/api/products/category/{id}", name="GET_ALL_CATEGORIES_PRODUCT_BY_ID", methods={"GET"})
+     */
+    public function GetByCategoryId($id, ProductRepository $productRepository)
+    {
+
+        if ($productRepository->findBy(['Category' => $id]) == null) {
+            $json = ['message' => 'id not found'];
+
+            return $this->json($json, 400, []);
+        }
+        return $this->json($productRepository->findBy(['Category' => $id]), 200, [], ['groups' => 'product']);
+    }
 
     /**
      * @Route("/api/product/{id}", name="DELETE_PRODUCT", methods={"DELETE"})
